@@ -6,6 +6,8 @@ import java.util.TreeSet;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Future;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.scheduling.annotation.AsyncResult;
 import simplyhired.model.JobScorer;
 import simplyhired.model.job.JobDescription;
@@ -66,7 +68,7 @@ public class JobDescriptionScorer {
 			try {
 				while (true) {
 					JobDescription task = taskQueue.take();
-					if (task.getJobTitle() == null) {
+					if (task.getTitle() == null) {
 						workCompleted();
 						break;
 					}
@@ -104,7 +106,8 @@ public class JobDescriptionScorer {
 
 		@Override
 		public void run() {
-			double score = jobScorer.getScore(jobDes.getJobDes());
+			Document doc = Jsoup.parse(jobDes.getJobDescription());
+			double score = jobScorer.getScore(doc.text());
 			jobDes.setScore(score);
 			addJob(jobDes);
 		}

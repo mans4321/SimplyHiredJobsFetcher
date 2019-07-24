@@ -51,7 +51,7 @@ public class SimplyHiredAPI implements FetchJobsAPI {
 		JobInfoSelectors selectors = new JobInfoSelectors();
 		selectors.setJobDes("div.viewjob-description");
 		selectors.setCompanyName("span.company");
-		selectors.setJobTitle("h1[itemprop=title]");
+		selectors.setJobTitle("div.viewjob-header h1");
 		selectors.setCity("span.location");
 		
 		JobDescription jobDes = jobInfoExtractor.extract(page, selectors);

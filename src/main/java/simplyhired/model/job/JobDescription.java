@@ -3,37 +3,35 @@ package simplyhired.model.job;
 public class JobDescription implements Comparable<JobDescription> {
 
 	private double score;
-	private String jobTitle;
-	private String companyName;
+	private String title;
+	private String company;
 	private String city;
 	private String url;
-	private String jobDes;
-	private String jobDesInHtmlFormat;
-
+	private String jobDescription;
+	private String website;
 	
 	public JobDescription() {
 	}
 	
-	public JobDescription(String jobTitle, String companyName, String city, String jobDes,
-			String htmlJobDes) {
-		this.jobTitle = jobTitle;
-		this.companyName = companyName;
+	public JobDescription(String jobTitle, String companyName, String city, String jobDes) {
+		this.title = jobTitle;
+		this.company = companyName;
 		this.city = city;
-		this.jobDes = jobDes;
-		this.jobDesInHtmlFormat = htmlJobDes;
+		this.website = "SimplyHired";
+		this.jobDescription = jobDes;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		JobDescription castObj = (JobDescription) obj;
-		if (this.jobTitle.equals(castObj.getJobTitle()) && checkSubString(castObj))
+		if (this.title.equals(castObj.getTitle()) && checkSubString(castObj))
 			return true;
 		return false;
 	}
 
 	@Override
 	public int compareTo(JobDescription arg0) {
-		if (this.jobTitle.equals(arg0.getJobTitle()) && checkSubString(arg0))
+		if (this.title.equals(arg0.getTitle()) && checkSubString(arg0))
 			return 0;
 
 		if (Double.compare(this.score, arg0.getScore()) == 0)//TODO why
@@ -42,20 +40,15 @@ public class JobDescription implements Comparable<JobDescription> {
 	}
 
 	private boolean checkSubString(JobDescription arg0) {
-		if (this.companyName.length() > arg0.getCompanyName().length())
-			return this.companyName.contains(arg0.getCompanyName());
-		else if (this.companyName.length() < arg0.getCompanyName().length())
-			return arg0.getCompanyName().contains(this.companyName);
+		if (this.company.length() > arg0.getCompany().length())
+			return this.company.contains(arg0.getCompany());
+		else if (this.company.length() < arg0.getCompany().length())
+			return arg0.getCompany().contains(this.company);
 		else
-			return this.companyName.equals(arg0.getCompanyName());
+			return this.company.equals(arg0.getCompany());
 	}
 	
 
-	@Override
-	public String toString() {
-		return "JobDescription [score=" + score + ", jobTitle=" + jobTitle + ", companyName=" + companyName + ", city="
-				+ city + "url=" + url + "]";
-	}
 
 	public double getScore() {
 		return score;
@@ -65,16 +58,16 @@ public class JobDescription implements Comparable<JobDescription> {
 		this.score = score;
 	}
 
-	public String getJobDes() {
-		return jobDes;
+	public String getJobDescription() {
+		return jobDescription;
 	}
 
-	public String getJobTitle() {
-		return jobTitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public String getCompanyName() {
-		return companyName;
+	public String getCompany() {
+		return company;
 	}
 
 	public String getCity() {
@@ -84,12 +77,12 @@ public class JobDescription implements Comparable<JobDescription> {
 	public String getUrl() {
 		return url;
 	}
-
-	public String getJobDesInHtmlFormat() {
-		return jobDesInHtmlFormat;
-	}
 	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getWebsite() {
+		return website;
 	}
 }
